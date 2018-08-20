@@ -2,14 +2,19 @@ version: '3.0'
 services:
   web:
     image: alexcheng/magento2
+    volumes:
+      - ./app/code/Stonesoup:/var/www/html/app/code/Stonesoup
+      - ./app/design/frontend/Stonesoup:/var/www/html/app/design/frontend/Stonesoup
     ports:
-      - "80:80"
+      - "8080:80"
     links:
       - db
     env_file:
       - env
   db:
     image: mysql:5.6.23
+    ports:
+      - "4306:3306"
     volumes:
       - db-data:/var/lib/mysql/data
     env_file:
